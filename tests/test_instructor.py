@@ -5,7 +5,7 @@ def test_instructor_creation():
     instructor = Instructor("Jimmy Cantadio", "jimmy@gmail.com", "123456", "Yoga" )
     assert instructor.name == "Jimmy Cantadio"
     assert instructor.email == "jimmy@gmail.com"
-    assert instructor.password == "123456"
+    assert instructor.check_password("123456")
     assert instructor.speciality == "Yoga"
 
 def test_instructor_inheritance():
@@ -18,6 +18,10 @@ def test_instructor_speciality_property():
     with pytest.raises(AttributeError):
         instructor.speciality = "Cardio"
 
+def test_instructor_password():
+    instructor = Instructor("Alice Brown", "alice@example.com", "alicepass", "Zumba")
+    assert instructor.check_password("alicepass")
+    assert not instructor.check_password("wrongpass")
 
 def test_instructor_str_representation():
     instructor = Instructor("Alice Brown", "alice@example.com", "123456","Zumba")
