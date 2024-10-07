@@ -1,19 +1,23 @@
-import pytest
+import unittest
 from src.fitness_app.user import User
 
-def test_user_creation():
-    user = User("Luke Shaw", "Luke@gmail.com", "123456")
-    assert user.name == "Luke Shaw"
-    assert user.email == "Luke@gmail.com"
-    assert user.check_password ("123456")
+class TestUser(unittest.TestCase):
 
+    def test_user_creation(self):
+        user = User("Luke Shaw", "Luke@gmail.com", "123456")
+        self.assertEqual(user.name, "Luke Shaw")
+        self.assertEqual(user.email, "Luke@gmail.com")
+        self.assertTrue(user.check_password("123456"))
 
-def test_user_name_property():
-    user = User("Bobo Risky", "bob@gmail.com", "123456")
-    with pytest.raises(AttributeError):
-        user.name = "New Name"
+    def test_user_name_property(self):
+        user = User("Bobo Risky", "bob@gmail.com", "123456")
+        with self.assertRaises(AttributeError):
+            user.name = "New Name"
 
-def test_user_email_property():
-    user = User("Bobo Risky", "bob@gmail.com", "123456")
-    with pytest.raises(AttributeError):
-        user.email = "new_email@gmail.com"
+    def test_user_email_property(self):
+        user = User("Bobo Risky", "bob@gmail.com", "123456")
+        with self.assertRaises(AttributeError):
+            user.email = "new_email@gmail.com"
+
+if __name__ == '__main__':
+    unittest.main()
